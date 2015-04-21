@@ -7,12 +7,60 @@
   <script src="app.js"></script>
   <script src="services/AnimalFactory.js"></script>
   <script src='controllers/AnimalController.js'></script>
+  <script src='controllers/AdoptionController.js'></script>
   <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
   <div class="container">
 
+    <div ng-controller="AnimalCtrl">
+      <div class="row">
+        <div class="col-md-6">
+          <h2>New Animal</h2>
+          <form ng-submit="AnimalFactory.addAnimal()" class="form-inline" role="form">
+            <div class="form-group">
+              <input type="text" ng-model="AnimalFactory.animalName" class="form-control" placeholder="Enter name">
+              <input type="text" ng-model="AnimalFactory.animalType" class="form-control" placeholder="Enter type of animal">
+            </div>
+            <button type="submit" class="btn btn-info">Submit</button>
+          </form>
+        </div>
+      </div>
 
+    <div class="row">
+        <div class="col-md-4">
+          <h2 ng-show="animals.length && filtered.length">Animal List</h2>
+          <h2 ng-show='animals.length && !filtered.length'>No Matches</h2>
+          <ul>
+            <li ng-repeat="item in filtered = (animals | filter:query)">
+              <span ng-click="editing = true" ng-hide="editing">
+                {{item.name}}, {{ item.type }} <button class="btn btn-xs btn-warning" ng-click="AnimalFactory.deleteAnimal(item)">x</button>
+              </span>
+              <span class="form-group" ng-show="editing" ng-submit="editing = false">
+                <form class="form-inline" role="form">
+                  <input type="text" class="form-control input-sm" ng-model="item.name" placeholder="Name" required/>
+                  <input type="text" class="form-control input-sm" ng-model="item.type" placeholder="Animal type" required/>
+                  <button class="btn btn-info btn-sm" type="submit">Save</button>
+                </form>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class="col-md-4">
+          <h2>Search Animals</h2>
+          <form class="form-inline" role='form'>
+            <div class='form-group'>
+              <input ng-model="query" type='text' class='form-control' placeholder='search'>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+    </div>
   </div>
+
 </body>
 </html>
