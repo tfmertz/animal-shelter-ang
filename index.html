@@ -58,7 +58,26 @@
           </form>
         </div>
       </div>
-      
+
+      <div class="row adoption" ng-controller="AdoptionCtrl">
+        <div class="col-md-4" ng-show="animalsAvailable.length">
+          <h3>Animals available for adoption:</h3>
+            <ul>
+              <li ng-repeat="item in animalsAvailable = (animals | filter: {adopted: false})">{{ item.name }} the {{ item.type }} <button class="btn btn-warning btn-xs" ng-click="adopt(item)">adopt me!</button></li>
+            </ul>
+        </div>
+
+        <div class="col-md-4" ng-show="animalsAdopted.length">
+          <h3>Adopted animals:</h3>
+            <ul>
+              <li ng-repeat="item in animalsAdopted = (animals | filter: {adopted: true})">{{ item.name }} the {{ item.type }}<button class="btn btn-warning btn-xs" ng-click="abandon(item)">please don't click me</button></li>
+            </ul>
+        </div>
+
+      </div>
+
+
+
     </div>
   </div>
 

@@ -1,5 +1,5 @@
 Animal.controller('AdoptionCtrl', function AdoptionCtrl($scope, AnimalFactory) {
-    $scope.animals = StudentsFactory.animals;
+    $scope.animals = AnimalFactory.animals;
     $scope.adopt = function(animal) {
       animal.adopted = true;
     };
